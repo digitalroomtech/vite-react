@@ -45,7 +45,7 @@ Envuelve tu aplicación con el componente `<SessionClientProvider/>`
 ```tsx
 import {
     SessionClientProvider,
-} from 'react-easy-wall';
+} from 'vite-easy-wall';
 
 const Component = () => {
     return (
@@ -56,9 +56,13 @@ const Component = () => {
 }
 ```
 
+<br>
+
+#### Hook de la sesión
+
 ```tsx
 import React from "react";
-import {useSession} from "react-easy-wall";
+import {useSession} from "vite-easy-wall";
 
 const Component: React.FC = () => {
 
@@ -80,18 +84,21 @@ const Component: React.FC = () => {
 
 ```
 
+<br>
+
 ### Integración del Panel
 
 #### `<Panel/>`
 
-Los props son una extensión de `DrawerProps` de la libreria [Drawer](https://mui.com/material-ui/api/drawer/)
+| Prop     | Tipo          | Descripción                                       |
+|:---------|:--------------|:--------------------------------------------------|
+| children | `ReactNode`   | Componente hijo                                   |
+| footer   | `ReactNode`   | Componente del footer                             |
+| ...rest  | `DrawerProps` | [Drawer](https://mui.com/material-ui/api/drawer/) |
 
-##### Extra:
+<br>
 
-| Prop     | Tipo        | Descripción           |
-|:---------|:------------|:----------------------|
-| children | `ReactNode` | Componente hijo       |
-| footer   | `ReactNode` | Componente del footer |
+#### Ejemplo:
 
 ```tsx
 // main.tsx or index.tsx
@@ -103,7 +110,7 @@ import {
     PanelListItems,
     PanelSubscriptionIcon,
     PanelFooter,
-} from 'react-easy-wall';
+} from 'vite-easy-wall';
 
 
 const Component = () => {
@@ -138,6 +145,8 @@ const Component = () => {
 }
 ```
 
+<br>
+
 ### Boton de autenticación
 
 Boton encargado de redireccionar al portal de autenticación y abrir panel de usuario
@@ -155,9 +164,60 @@ const Button: React.FC = () => {
 
 ```
 
+<br>
+
 ### Paywall
 
 Para el uso del paywall envuelve con `<Paywall/>` el contenido a bloquear
+
+#### `<Paywall/>`
+
+| Prop                         | Tipo        | Descripción                             |
+|:-----------------------------|:------------|:----------------------------------------|
+| postPremium                  | `boolean`   | Id de la nota                           |
+| LoadingComponent             | `ReactNode` | Componente de indicador de carga        |
+| PaywallRegisterComponent     | `ReactNode` | Componente para bloqueo de usuarios     |
+| PaywallSubscriptionComponent | `ReactNode` | Componente para bloqueo de suscriptores |
+
+<br>
+
+#### `<PaywallSubscription/>`
+
+Bloqueo para usuarios que no poseen suscripción activa
+
+| Prop                 | Tipo              | Descripción                                               |
+|:---------------------|:------------------|:----------------------------------------------------------|
+| containerProps       | `BoxProps`        | [Box](https://mui.com/material-ui/api/box/)               |
+| titleProps           | `TypographyProps` | [Typography](https://mui.com/material-ui/api/typography/) |
+| subtitleProps        | `TypographyProps` | [Typography](https://mui.com/material-ui/api/typography/) |
+| buttonProps          | `ButtonProps`     | [Button](https://mui.com/material-ui/api/button/)         |
+| buttonText           | `string`          | Texto en el boton de suscripciones                        |
+| secondaryButtonProps | `ButtonProps`     | [Button](https://mui.com/material-ui/api/button/)         |
+| secondaryButtonText  | `string`          | Texto en el boton secundario de suscripciones             |
+| title                | `string`          | Título del modal                                          |
+| subtitle             | `string`          | Subtitulo del modal                                       |
+
+<br>
+
+#### `<PaywallRegister/>`
+
+Bloqueo para usuarios que no poseen registro
+
+| Prop                 | Tipo              | Descripción                                               |
+|:---------------------|:------------------|:----------------------------------------------------------|
+| containerProps       | `BoxProps`        | [Box](https://mui.com/material-ui/api/box/)               |
+| titleProps           | `TypographyProps` | [Typography](https://mui.com/material-ui/api/typography/) |
+| subtitleProps        | `TypographyProps` | [Typography](https://mui.com/material-ui/api/typography/) |
+| buttonProps          | `ButtonProps`     | [Button](https://mui.com/material-ui/api/button/)         |
+| buttonText           | `string`          | Texto en el boton de suscripciones                        |
+| secondaryButtonProps | `ButtonProps`     | [Button](https://mui.com/material-ui/api/button/)         |
+| secondaryButtonText  | `string`          | Texto en el boton secundario de suscripciones             |
+| title                | `string`          | Título del modal                                          |
+| subtitle             | `string`          | Subtitulo del modal                                       |
+
+<br>
+
+#### Ejemplo:
 
 ```tsx
 
@@ -165,7 +225,7 @@ import {
     PaywallSubscription,
     PaywallRegister,
     Paywall
-} from 'react-easy-wall';
+} from 'vite-easy-wall';
 
 const Component: React.FC = () => {
     return (
@@ -185,11 +245,26 @@ const Component: React.FC = () => {
 }
 ```
 
+<br>
+
 ### Guardar nota
+
+| Prop                       | Tipo                                                          | Descripción                                                       |
+|:---------------------------|:--------------------------------------------------------------|:------------------------------------------------------------------|
+| postId                     | `number`                                                      | Id de la nota                                                     |
+| withOutAuthorizationAction | `() => void`                                                  | Action para cuando los usuarios no estan suscriptos o registrados |
+| NotSavedNoteComponent      | `ReactNode`                                                   | Componente para cuando no esta guardada la nota                   |
+| SavedNoteComponent         | `ReactNode`                                                   | Componente para cuando esta guardada la nota                      |
+| SavedNoteComponent         | `(data:CreateSavedPostEvent or DeleteSavedPostEvent) => void` | Función para  obtener la data guardada                            |
+| onCompleted                | `(data:Error) => void`                                        | Función para obtener el error de la mutación                      |
+
+<br>
+
+#### Ejemplo:
 
 ```tsx
 import React from "react";
-import {useSession} from "react-easy-wall";
+import {useSession} from "vite-easy-wall";
 
 const Component: React.FC = () => {
 
@@ -205,7 +280,9 @@ const Component: React.FC = () => {
                     width: 150,
                 },
             }}
-            postId={1325606}
+            postId={
+                /*...*/
+            }
             onCompleted={() => refetch()}
             withOutAuthorizationAction={() => console.log('No tiene suscripción activa')}
             NotSavedNoteComponent={<div>Guardar</div>}
@@ -216,19 +293,29 @@ const Component: React.FC = () => {
 
 ```
 
-### Comentarios
+<br>
+
+### Integración de Comentarios
+
+#### `<CommentProvider/>`
 
 | Prop               | Tipo      | Descripción                               |
 |:-------------------|:----------|:------------------------------------------|
-| postId             | `number`  | Id de la nota                             |
+| id                 | `number`  | Id de la nota                             |
 | onlyForRegistered  | `boolean` | Solo usuarios registrados pueden comentar |
 | onlyForSubscribers | `boolean` | Solo usuarios suscritos pueden comentar   |
+
+<br>
+
+#### Ejemplo:
 
 ```tsx
 const Component = () => {
     return (
         <CommentProvider
-            id={1325606}
+            id={
+                /*...*/
+            }
             onlyForRegistered={
                 /* Condiciones */
             }
