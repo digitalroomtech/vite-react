@@ -98,6 +98,51 @@ const Component: React.FC = () => {
 
 <br>
 
+#### `<PanelHeader/>`
+
+| Prop           | Tipo                                                                                   | Descripción                                 |
+|:---------------|:---------------------------------------------------------------------------------------|:--------------------------------------------|
+| containerProps | `BoxProps`                                                                             | [Box](https://mui.com/material-ui/api/box/) |
+| imageProps     | `React.DetailedHTMLProps<React.ImgHTMLAttributes<HTMLImageElement>, HTMLImageElement>` | Imagen del logo                             |
+
+<br>
+
+#### `<PanelAvatar/>`
+
+| Prop                       | Tipo              | Descripción                                               |
+|:---------------------------|:------------------|:----------------------------------------------------------|
+| avatarProps                | `AvatarProps`     | [Avatar](https://mui.com/material-ui/api/avatar/)         |
+| textProps                  | `TypographyProps` | [Typography](https://mui.com/material-ui/api/typography/) |
+| textLink                   | `string`          | Texto que tendra el link. Default = Administrar Cuenta    |
+| SubscriptionImageComponent | `ReacNode`        | Imagen que tendran los usuarios premium                   |
+
+<br>
+
+#### `<PanelListItems/>`
+
+| Prop           | Tipo               | Descripción                                               |
+|:---------------|:-------------------|:----------------------------------------------------------|
+| dividerProps   | `DividerProps`     | [Divider](https://mui.com/material-ui/api/divider/)       |
+| containerProps | `BoxProps`         | [Box](https://mui.com/material-ui/api/box/)               |
+| listProps      | `ListProps`        | [List](https://mui.com/material-ui/api/list/)             |
+| titleProps     | `TypographyProps`  | [Typography](https://mui.com/material-ui/api/typography/) |
+| title          | `string`           | Titulo del listado                                        |
+| routes         | `PanelListRoute[]` | Listado de rutas internas                                 |
+
+<br>
+
+#### `<PanelFooter/>`
+
+| Prop              | Tipo                               | Descripción                                                   |
+|:------------------|:-----------------------------------|:--------------------------------------------------------------|
+| dividerProps      | `DividerProps`                     | [Divider](https://mui.com/material-ui/api/divider/)           |
+| listProps         | `ListProps`                        | [Box](https://mui.com/material-ui/api/list/)                  |
+| listItemProps     | `ListItemProps & {href?: string;}` | [List Item](https://mui.com/material-ui/api/list-item/)       |
+| listItemTextProps | `ListItemTextProps`                | [Typography](https://mui.com/material-ui/api/list-item-text/) |
+|
+
+<br>
+
 #### Ejemplo:
 
 ```tsx
@@ -140,6 +185,7 @@ const Component = () => {
                 }
             />
             <PanelListItems routes={[{path: '/', name: 'Artículos guardados'}]} title="MI CUENTA"/>
+            {/*  Componentes extras...*/}
         </Panel>
     );
 }
