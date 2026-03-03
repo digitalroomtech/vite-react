@@ -1,6 +1,8 @@
 ## Documentation
 
-- [Material UI](https://mui.com/material-ui/all-components/) - Nuestro sistema de estilos y componentes están basados en el framework Material UI
+- [Material UI](https://mui.com/material-ui/all-components/) - Nuestro sistema de estilos y componentes están basados en
+  el framework Material UI
+
 ## Para empezar
 
 ### Instalación
@@ -26,7 +28,7 @@ VITE_EW_COOKIE_TOKEN_NAME=nombre-de-la-cookie
 # Dominio de la cookie (usa '.' para incluir subdominios, ej: .localhost)
 VITE_EW_COOKIE_DOMAIN=.tudominio.com
 
-# LLave de google para autenticación de usuario
+# Llave de google para autenticación de usuario
 
 VITE_EW_GOOGLE_API_KEY=.tudominio.com
 ```
@@ -37,7 +39,7 @@ Envuelve tu aplicación con el componente `<SessionClientProvider/>`
 
 | Prop     | Tipo        | Descripción                       |
 |:---------|:------------|:----------------------------------|
-| children | `ReactNode` | Componente interno                |
+| children | `ReactNode` | Componente hijo                   |
 | config   | `Config`    | Configuración global de la sesión |
 
 ```tsx
@@ -61,14 +63,14 @@ import {useSession} from "react-easy-wall";
 const Component: React.FC = () => {
 
     const {
-        user, 
+        user,
         subscription,
         config
     } = useSession()
-    
-    if(subscription) return <div>Tiene suscripción activa</div>
 
-    if(user) return <div>Esta registrado y no tiene una suscripción activa</div>
+    if (subscription) return <div>Tiene suscripción activa</div>
+
+    if (user) return <div>Esta registrado y no tiene una suscripción activa</div>
 
 
     return (
@@ -78,7 +80,6 @@ const Component: React.FC = () => {
 
 ```
 
-
 ### Integración del Panel
 
 #### `<Panel/>`
@@ -87,11 +88,10 @@ Los props son una extensión de `DrawerProps` de la libreria [Drawer](https://mu
 
 ##### Extra:
 
-| Prop     | Tipo         | Descripción           |
-|:---------|:-------------|:----------------------|
-| children | `ReactNode`  | Componente interno    |
-| footer   | `ReactNode`  | Componente del footer |
-
+| Prop     | Tipo        | Descripción           |
+|:---------|:------------|:----------------------|
+| children | `ReactNode` | Componente hijo       |
+| footer   | `ReactNode` | Componente del footer |
 
 ```tsx
 // main.tsx or index.tsx
@@ -144,11 +144,11 @@ Boton encargado de redireccionar al portal de autenticación y abrir panel de us
 
 ```tsx
 
-const Button:React.FC = ()=>{
+const Button: React.FC = () => {
     return (
         <PanelButton
-            registerButtonProps={{ sx: { background: 'black', color: 'white' } }}
-            loginButtonProps={{ sx: { background: 'black', color: 'white' } }}
+            registerButtonProps={{sx: {background: 'black', color: 'white'}}}
+            loginButtonProps={{sx: {background: 'black', color: 'white'}}}
         />
     )
 }
@@ -167,12 +167,12 @@ import {
     Paywall
 } from 'react-easy-wall';
 
-const Component:React.FC = ()=>{
+const Component: React.FC = () => {
     return (
         <Paywall
             postPremium
-            PaywallSubscriptionComponent={<PaywallSubscription />}
-            PaywallRegisterComponent={<PaywallRegister />}>
+            PaywallSubscriptionComponent={<PaywallSubscription/>}
+            PaywallRegisterComponent={<PaywallRegister/>}>
             LoadingComponent={<div>Cargando...</div>}
             <div className="card">
                 <button onClick={() => setCount((count) => count + 1)}>count is {count}</button>
@@ -193,8 +193,8 @@ import {useSession} from "react-easy-wall";
 
 const Component: React.FC = () => {
 
-    const { refetch } = useSession();
-    
+    const {refetch} = useSession();
+
     return (
         <SaveNoteButton
             buttonProps={{
@@ -218,10 +218,24 @@ const Component: React.FC = () => {
 
 ### Comentarios
 
+| Prop               | Tipo      | Descripción                               |
+|:-------------------|:----------|:------------------------------------------|
+| postId             | `number`  | Id de la nota                             |
+| onlyForRegistered  | `boolean` | Solo usuarios registrados pueden comentar |
+| onlyForSubscribers | `boolean` | Solo usuarios suscritos pueden comentar   |
+
 ```tsx
-const Component = ()=>{
+const Component = () => {
     return (
-        <CommentProvider id={1325606} onlyForRegistered>
+        <CommentProvider
+            id={1325606}
+            onlyForRegistered={
+                /* Condiciones */
+            }
+            onlyForSubscribers={
+                /* Condiciones */
+            }
+        >
             <Comments
                 showCommentButtonProps={{
                     showCommentButtonProps: {
@@ -239,18 +253,18 @@ const Component = ()=>{
                 createCommentContainerProps={{
                     createCommentTitleProps: {
                         sx: {
-                            color: { md: 'red', xs: 'green' },
+                            color: {md: 'red', xs: 'green'},
                         },
                     },
                     createCommentActionProps: {
                         loginButtonProps: {
                             sx: {
-                                color: { md: 'red', xs: 'green' },
+                                color: {md: 'red', xs: 'green'},
                             },
                         },
                         registerButtonProps: {
                             sx: {
-                                color: { md: 'blue', xs: '#E8600B' },
+                                color: {md: 'blue', xs: '#E8600B'},
                             },
                         },
                         subscriptionButtonProps: {
@@ -260,8 +274,8 @@ const Component = ()=>{
                         },
                     },
                     createCommentProps: {
-                        createCommentAvatarProps: { sx: {} },
-                        createCommentNameTextProps: { sx: {} },
+                        createCommentAvatarProps: {sx: {}},
+                        createCommentNameTextProps: {sx: {}},
                         createCommentButtonProps: {
                             sx: {
                                 color: 'white',
