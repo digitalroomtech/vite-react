@@ -14,7 +14,7 @@
     "prettier": "^3.8.1",
     "react": "^19.2.0",
     "react-dom": "^19.2.0",
-    "vite-easy-wall": "^1.0.54",
+    "vite-easy-wall": "^1.2.2",
     "vite-react": "^5.0.0"
   },
   "devDependencies": {

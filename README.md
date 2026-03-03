@@ -148,7 +148,6 @@ const Component: React.FC = () => {
 ```tsx
 // main.tsx or index.tsx
 import {
-    SessionClientProvider,
     Panel,
     PanelAvatar,
     PanelHeader,
@@ -196,6 +195,20 @@ const Component = () => {
 ### Boton de autenticación
 
 Boton encargado de redireccionar al portal de autenticación y abrir panel de usuario
+
+#### `<PanelButton/>`
+
+| Prop                | Tipo                       | Descripción                                       |
+|:--------------------|:---------------------------|:--------------------------------------------------|
+| params              | `{[key: string]: string;}` | Parametros extras para la url de autenticación    |
+| loginButtonText     | `string`                   | Texto para boton de iniciar sesión                |
+| registerButtonText  | `string`                   | Texto para boton de registro                      |
+| registerButtonProps | `ButtonProps`              | [Button](https://mui.com/material-ui/api/button/) |
+| loginButtonProps    | `ButtonProps`              | [Button](https://mui.com/material-ui/api/button/) |
+
+<br>
+
+#### Ejemplo:
 
 ```tsx
 
@@ -350,6 +363,18 @@ const Component: React.FC = () => {
 | id                 | `number`  | Id de la nota                             |
 | onlyForRegistered  | `boolean` | Solo usuarios registrados pueden comentar |
 | onlyForSubscribers | `boolean` | Solo usuarios suscritos pueden comentar   |
+
+<br>
+
+#### `<Comments/>`
+
+| Prop                        | Tipo                                     | Descripción                                                                                 |
+|:----------------------------|:-----------------------------------------|:--------------------------------------------------------------------------------------------|
+| commentSubscriptionProps    | `CommentSubscriptionDialogProps`         | Parametros para modal que se activa para los  usuarios que no esten registrados o suscritos |
+| LoadingComponent            | `ReactNode`                              | Componente de indicador de carga                                                            |
+| showCommentButtonProps      | `ShowCommentButtonProps`                 | Parametros para cambiar estilos y texto del boton de mostrar/ocultar comentarios            |
+| createCommentContainerProps | `CreateCommentContainerProps`            | Parametros para el input de crear comentarios                                               |
+| commentContainerProps       | `Omit<CommentContainerProps, 'comment'>` | Parametros Contenedor de comentarios                                                        |
 
 <br>
 
