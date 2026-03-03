@@ -31,15 +31,70 @@ VITE_EW_COOKIE_DOMAIN=.tudominio.com
 VITE_EW_GOOGLE_API_KEY=.tudominio.com
 ```
 
-### Panel
+### Sesión
 
-Configura el portal envolviendo tu aplicación `<SessionClientProvider/>`
+Envuelve tu aplicación con el componente `<SessionClientProvider/>`
+
+| Prop     | Tipo        | Descripción                       |
+|:---------|:------------|:----------------------------------|
+| children | `ReactNode` | Componente interno                |
+| config   | `Config`    | Configuración global de la sesión |
+
+```tsx
+import {
+    SessionClientProvider,
+} from 'react-easy-wall';
+
+const Component = () => {
+    return (
+        <SessionClientProvider config={config}>
+            <App/>
+        </SessionClientProvider>
+    );
+}
+```
+
+```tsx
+import React from "react";
+import {useSession} from "react-easy-wall";
+
+const Component: React.FC = () => {
+
+    const {
+        user, 
+        subscription,
+        config
+    } = useSession()
+    
+    if(subscription) return <div>Tiene suscripción activa</div>
+
+    if(user) return <div>Esta registrado y no tiene una suscripción activa</div>
+
+
+    return (
+        <div>No esta registrado y no tiene suscripción activa</div>
+    )
+}
+
+```
+
+
+### Integración del Panel
+
+#### `<Panel/>`
+
+Los props son una extensión de `DrawerProps` de la libreria [Drawer](https://mui.com/material-ui/api/drawer/)
+
+##### Extra:
+
+| Prop     | Tipo         | Descripción           |
+|:---------|:-------------|:----------------------|
+| children | `ReactNode`  | Componente interno    |
+| footer   | `ReactNode`  | Componente del footer |
+
 
 ```tsx
 // main.tsx or index.tsx
-
-
-import Corona from '../public/corona.svg';
 import {
     SessionClientProvider,
     Panel,
@@ -50,46 +105,35 @@ import {
     PanelFooter,
 } from 'react-easy-wall';
 
-const config = {
-    uri: import.meta.env.VITE_EW_URI,
-    urlPortal: import.meta.env.VITE_EW_URL_PORTAL,
-    cookieTokenName: import.meta.env.VITE_EW_COOKIE_TOKEN_NAME,
-    cookieDomain: import.meta.env.VITE_EW_COOKIE_DOMAIN,
-    googleClient: import.meta.env.VITE_EW_GOOGLE_API_KEY,
-};
 
-
-export default function RootLayout({children}: { children: React.ReactNode }) {
+const Component = () => {
     return (
-        <SessionClientProvider config={config}>
-            <App />
-            <Panel anchor="right" footer={<PanelFooter />}>
-                <PanelHeader
-                    containerProps={{
-                        sx: {
-                            backgroundColor: 'black',
-                            height: 60,
-                            display: 'flex',
-                            alignItems: 'center',
-                            justifyContent: 'center',
-                        },
-                    }}
-                    imageProps={{
-                        src: '/logo.svg',
-                        width: 78,
-                        height: 24,
-                    }}
-                />
-                <PanelAvatar
-                    SubscriptionImageComponent={
-                        <PanelSubscriptionIcon>
-                            <img src="/corona.svg" alt="corona-icon" width={16} height={16} />
-                        </PanelSubscriptionIcon>
-                    }
-                />
-                <PanelListItems routes={[{ path: '/', name: 'Artículos guardados' }]} title="MI CUENTA" />
-            </Panel>
-        </SessionClientProvider>
+        <Panel anchor="right" footer={<PanelFooter/>}>
+            <PanelHeader
+                containerProps={{
+                    sx: {
+                        backgroundColor: 'black',
+                        height: 60,
+                        display: 'flex',
+                        alignItems: 'center',
+                        justifyContent: 'center',
+                    },
+                }}
+                imageProps={{
+                    src: '/logo.svg',
+                    width: 78,
+                    height: 24,
+                }}
+            />
+            <PanelAvatar
+                SubscriptionImageComponent={
+                    <PanelSubscriptionIcon>
+                        <img src="/corona.svg" alt="corona-icon" width={16} height={16}/>
+                    </PanelSubscriptionIcon>
+                }
+            />
+            <PanelListItems routes={[{path: '/', name: 'Artículos guardados'}]} title="MI CUENTA"/>
+        </Panel>
     );
 }
 ```
@@ -139,32 +183,6 @@ const Component:React.FC = ()=>{
         </Paywall>
     )
 }
-```
-
-### Uso del hook de sesión
-
-```tsx
-import React from "react";
-import {useSession} from "react-easy-wall";
-
-const Component: React.FC = () => {
-
-    const {
-        user, 
-        subscription,
-        config
-    } = useSession()
-    
-    if(subscription) return <div>Tiene suscripción activa</div>
-
-    if(user) return <div>Esta registrado y no tiene una suscripción activa</div>
-
-
-    return (
-        <div>No esta registrado y no tiene suscripción activa</div>
-    )
-}
-
 ```
 
 ### Guardar nota
@@ -298,4 +316,4 @@ const Component = ()=>{
         </CommentProvider>
     )
 }
-```# vite-react
+```
