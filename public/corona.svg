@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" viewBox="0 0 16 15">
+  <g id="corona" transform="translate(0.332 0.074)">
+    <ellipse id="Elipse_16" data-name="Elipse 16" cx="8" cy="7.5" rx="8" ry="7.5" transform="translate(-0.332 -0.074)" fill="#fff"/>
+    <g id="Layer_1" transform="translate(2.813 3.982)">
+      <g id="Grupo_533" data-name="Grupo 533" transform="translate(0 0)">
+        <g id="Grupo_532" data-name="Grupo 532">
+          <path id="Trazado_458" data-name="Trazado 458" d="M1.554,9.428,1,5.851a.3.3,0,0,1,.474-.284L3.192,6.852a.41.41,0,0,0,.587-.1L5.206,4.611a.381.381,0,0,1,.634,0L7.268,6.752a.41.41,0,0,0,.587.1L9.569,5.567a.3.3,0,0,1,.474.284l-.55,3.577Z" transform="translate(-1 -4.441)" fill="#ffb743"/>
+          <path id="Trazado_459" data-name="Trazado 459" d="M10.362,24.494H3.251a.414.414,0,0,1-.414-.414v-.909h7.938v.909A.414.414,0,0,1,10.362,24.494Z" transform="translate(-2.283 -17.523)" fill="#ffb743"/>
+        </g>
+      </g>
+    </g>
+  </g>
+</svg>
